@@ -1,0 +1,85 @@
+#Quick Notes 
+#--For Truncate condition can not written.
+# Each and every statement should end with Semicolon ;
+# When you doing any NULL checck, it should be is NULL. NULL is not a string or characters.
+# Once COMMIT; it can't be rollback.  
+
+#DDL  create , alter , drop, truncate
+create database personal_info; 
+select * from personal_info;
+create table personal_info.name(
+first_name varchar(20),
+last_name varchar(20),
+college_name varchar(20),
+address varchar(20),
+phone int8
+);
+
+alter table personal_info.name add roll_numb integer;
+
+alter table personal_info.name add country varchar(20);
+alter table personal_info.name drop roll_numb;
+
+alter table personal_info.name 
+
+truncate table personal_info.name;
+truncate name
+set address
+where first_name='krish';
+
+truncate table personal_info.name;
+#DML manipulation: insert, update , delete
+
+insert into personal_info.name (first_name, last_name, college_name, address, phone)
+value('lulu', 'lakki', 'vnrvjiet', 'hyd', '9012345678');
+
+insert into personal_info.name (first_name, last_name, college_name, address, phone)
+value('dudu', 'gadi', 'royal', 'tn', '9087654321');
+
+insert into personal_info.name (first_name, last_name, college_name, address, phone)
+value('laddo', 'jigar', 'mallareddy', 'hyd', '9012365432');
+
+insert into personal_info.name(roll_numb)
+value('1');
+
+update personal_info.name 
+set roll_numb='1' 
+where first_name='lulu';
+
+update personal_info.name 
+set roll_numb='2' 
+where first_name='dudu';
+
+update personal_info.name 
+set roll_numb='3' 
+where first_name='laddo';
+
+delete 
+
+delete from personal_info.name 
+where first_name is NULL;
+#DQL Query: select 
+
+select * from personal_info.name;
+
+#TCL Transcation: commit, rollback, savepoint
+start Transaction  
+update personal_info.name
+set country='pak' 
+where roll_numb='2';
+savepoint update2;
+
+start Transaction  ;
+update personal_info.name
+set country='africa' 
+where roll_numb='3';
+savepoint update3;
+ rollback;
+commit;
+
+
+start Transaction ;
+delete from personal_info.name
+where country='india';
+commit;
+rollback;
